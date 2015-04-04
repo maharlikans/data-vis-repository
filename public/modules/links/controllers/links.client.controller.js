@@ -9,7 +9,9 @@ angular.module('links').controller('LinksController', ['$scope', '$stateParams',
 		$scope.create = function() {
 			// Create new Link object
 			var link = new Links ({
-				name: this.name
+				name: this.name,
+        url: this.url,
+        description: this.description
 			});
 
 			// Redirect after save
