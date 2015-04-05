@@ -1,0 +1,36 @@
+<section data-ng-controller="LinksController">
+    <div class="modal-header">
+        <h3 class="modal-title">Update Link</h3>
+    </div>
+    <div class="modal-body">
+        <form novalidate>
+            <fieldset>
+                <div class="form-group">
+                    <label class="control-label" for="name">Name</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="link.name" id="name" class="form-control" placeholder="Name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="url">Url</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="link.url" id="url" class="form-control" placeholder="http://yourlink.here" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="description">Description</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="link.description" id="description" class="form-control" placeholder="This is a really great tool that I want you all to see!" required>
+                    </div>
+                </div>
+                <div class="form-group modal-footer">
+                    <button class="btn btn-success" ng-click="updateLink()">Update</button>
+                    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                </div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+            </fieldset>
+        </form>
+    </div>
+</section>

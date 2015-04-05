@@ -10,11 +10,12 @@ angular.module('links').controller('LinksController', ['$scope', '$stateParams',
 
       var modalInstance = $modal.open({
         templateUrl: 'modules/links/views/delete-link-confirmation.client.view.html',
-        controller: function ($scope, $modalInstance, link) {
-          $scope.link = link;
+        controller: function ($scope, $modalInstance) {
+          $scope.link = selectedLink;
 
-          $scope.ok = function () {
-            $modalInstance.close($scope.selected.item);
+          $scope.deleteLink = function () {
+            $scope.remove($scope.link);
+            $modalInstance.close($scope.link);
           };
 
           $scope.cancel = function () {
@@ -22,6 +23,7 @@ angular.module('links').controller('LinksController', ['$scope', '$stateParams',
           };
         },
         size: size,
+        scope: $scope,
         resolve: {
           link: function () {
             return $scope.selectedLink;
@@ -29,8 +31,44 @@ angular.module('links').controller('LinksController', ['$scope', '$stateParams',
         }
       });
 
-      modalInstance.result.then(function (selectedItem) {
-        $scope.selected = selectedItem;
+      modalInstance.result.then(function (selectedLink) {
+        $scope.selected = selectedLink;
+      }, function () {
+        $log.info('Modal dismissed at: ' + new Date());
+      });
+
+    };
+    
+    // Open a modal window to update a link
+    $scope.modalUpdate = function (size, selectedLink) {
+
+      var modalInstance = $modal.open({
+        templateUrl: 'modules/links/views/update-link-confirmation.client.view.html',
+        controller: function ($scope, $modalInstance) {
+          $scope.link = selectedLink;
+
+          $scope.updateLink = function() {
+            $scope.update($scope.link);
+            if (!$scope.error) {
+              $modalInstance.close($scope.link);
+            }
+          };
+
+          $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
+          };
+        },
+        size: size,
+        scope: $scope,
+        resolve: {
+          link: function () {
+            return $scope.selectedLink;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (selectedLink) {
+        $scope.selected = selectedLink;
       }, function () {
         $log.info('Modal dismissed at: ' + new Date());
       });
@@ -48,7 +86,7 @@ angular.module('links').controller('LinksController', ['$scope', '$stateParams',
 
 			// Redirect after save
 			link.$save(function(response) {
-				$location.path('links/' + response._id);
+				$location.path('links');
 
 				// Clear form fields
 				$scope.name = '';
@@ -75,11 +113,10 @@ angular.module('links').controller('LinksController', ['$scope', '$stateParams',
 		};
 
 		// Update existing Link
-		$scope.update = function() {
-			var link = $scope.link;
+		$scope.update = function(link) {
 
 			link.$update(function() {
-				$location.path('links/' + link._id);
+				$location.path('links');
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});

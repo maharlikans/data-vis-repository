@@ -12,12 +12,13 @@
           <p data-ng-bind="link.description"></p>
         </div>
         <div class="caption" data-ng-show="((authentication.user) && (authentication.user._id == link.user._id))">
-          <a class="btn btn-primary" href="/#!/links/{{link._id}}/edit">
+          <a class="btn btn-primary" data-ng-click="modalUpdate('lg', link)">
             <i class="glyphicon glyphicon-edit"></i>
           </a>
           <a class="btn btn-primary" data-ng-click="modalDelete('lg', link)">
             <i class="glyphicon glyphicon-trash"></i>
           </a>
+        </div>
         <small class="caption">
           <span class="text-muted">
             Posted on
