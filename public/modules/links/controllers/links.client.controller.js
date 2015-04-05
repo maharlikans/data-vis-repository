@@ -1,9 +1,41 @@
 'use strict';
 
 // Links controller
-angular.module('links').controller('LinksController', ['$scope', '$stateParams', '$location', 'Authentication', 'Links',
-	function($scope, $stateParams, $location, Authentication, Links) {
+angular.module('links').controller('LinksController', ['$scope', '$stateParams', '$location', 'Authentication', 'Links', '$modal', '$log', 
+	function($scope, $stateParams, $location, Authentication, Links, $modal, $log) {
 		$scope.authentication = Authentication;
+
+    // Open a modal window to delete a link
+    $scope.modalDelete = function (size, selectedLink) {
+
+      var modalInstance = $modal.open({
+        templateUrl: 'modules/links/views/delete-link-confirmation.client.view.html',
+        controller: function ($scope, $modalInstance, link) {
+          $scope.link = link;
+
+          $scope.ok = function () {
+            $modalInstance.close($scope.selected.item);
+          };
+
+          $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
+          };
+        },
+        size: size,
+        resolve: {
+          link: function () {
+            return $scope.selectedLink;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (selectedItem) {
+        $scope.selected = selectedItem;
+      }, function () {
+        $log.info('Modal dismissed at: ' + new Date());
+      });
+
+    };
 
 		// Create new Link
 		$scope.create = function() {
