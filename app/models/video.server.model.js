@@ -16,6 +16,24 @@ var VideoSchema = new Schema({
 		required: 'Please fill Video name',
 		trim: true
 	},
+  url: {
+		type: String,
+		default: '',
+		required: 'Please fill Video url',
+		trim: true
+	},
+  embed: {
+		type: String,
+		default: '',
+		required: 'Please fill Video embed',
+		trim: true
+	},
+  description: {
+		type: String,
+		default: '',
+		required: 'Please fill Video description',
+		trim: true
+	},
 	created: {
 		type: Date,
 		default: Date.now

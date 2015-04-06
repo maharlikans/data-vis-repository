@@ -1,20 +1,93 @@
 'use strict';
 
 // Videos controller
-angular.module('videos').controller('VideosController', ['$scope', '$stateParams', '$location', 'Authentication', 'Videos',
-	function($scope, $stateParams, $location, Authentication, Videos) {
+angular.module('videos').controller('VideosController', ['$scope', '$stateParams', '$location', 'Authentication', 'Videos', '$modal', '$log',
+	function($scope, $stateParams, $location, Authentication, Videos, $modal, $log) {
 		$scope.authentication = Authentication;
+
+    // Open a modal window to delete a video
+    $scope.modalDelete = function (size, selectedVideo) {
+
+      var modalInstance = $modal.open({
+        templateUrl: 'modules/videos/views/delete-video-confirmation.client.view.html',
+        controller: function ($scope, $modalInstance) {
+          $scope.video = selectedVideo;
+
+          $scope.deleteVideo = function () {
+            $scope.remove($scope.video);
+            $modalInstance.close($scope.video);
+          };
+
+          $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
+          };
+        },
+        size: size,
+        scope: $scope,
+        resolve: {
+          video: function () {
+            return $scope.selectedVideo;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (selectedVideo) {
+        $scope.selected = selectedVideo;
+      }, function () {
+        $log.info('Modal dismissed at: ' + new Date());
+      });
+
+    };
+    
+    // Open a modal window to update a video
+    $scope.modalUpdate = function (size, selectedVideo) {
+
+      var modalInstance = $modal.open({
+        templateUrl: 'modules/videos/views/update-video-confirmation.client.view.html',
+        controller: function ($scope, $modalInstance) {
+          $scope.video = selectedVideo;
+
+          $scope.updateVideo = function() {
+            $scope.update($scope.video);
+            if (!$scope.error) {
+              $modalInstance.close($scope.video);
+            }
+          };
+
+          $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
+          };
+        },
+        size: size,
+        scope: $scope,
+        resolve: {
+          video: function () {
+            return $scope.selectedVideo;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (selectedVideo) {
+        $scope.selected = selectedVideo;
+      }, function () {
+        $log.info('Modal dismissed at: ' + new Date());
+      });
+
+    };
 
 		// Create new Video
 		$scope.create = function() {
 			// Create new Video object
 			var video = new Videos ({
-				name: this.name
+				name: this.name,
+        url: this.url,
+        embed: this.embed,
+        description: this.description
 			});
 
 			// Redirect after save
 			video.$save(function(response) {
-				$location.path('videos/' + response._id);
+				$location.path('videos');
 
 				// Clear form fields
 				$scope.name = '';
@@ -41,11 +114,9 @@ angular.module('videos').controller('VideosController', ['$scope', '$stateParams
 		};
 
 		// Update existing Video
-		$scope.update = function() {
-			var video = $scope.video;
-
+		$scope.update = function(video) {
 			video.$update(function() {
-				$location.path('videos/' + video._id);
+				$location.path('videos');
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -63,4 +134,9 @@ angular.module('videos').controller('VideosController', ['$scope', '$stateParams
 			});
 		};
 	}
-]);
+])
+.filter('to_trusted', ['$sce', function($sce) {
+    return function(text) {
+      return $sce.trustAsHtml(text);
+    };
+}]);

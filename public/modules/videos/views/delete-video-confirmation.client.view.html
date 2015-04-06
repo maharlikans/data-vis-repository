@@ -1,0 +1,12 @@
+<div data-ng-controller="VideosController">
+  <div class="modal-header">
+    <h3 class="modal-title">Confirm Deletion</h3>
+  </div>
+  <div class="modal-body">
+    Are you sure you want to delete the video "{{video.name}}"?
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-danger" ng-click="deleteVideo()">Delete</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+  </div>
+</div>

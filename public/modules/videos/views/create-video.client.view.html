@@ -12,6 +12,24 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="control-label" for="url">Url</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="url" id="url" class="form-control" placeholder="http://your.video.here" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="embed">Embed HTML</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="embed" id="embed" class="form-control" placeholder='<iframe width="560" height="315" src="https://www.youtube.com/embed/rlVwJvE3C5A" frameborder="0" allowfullscreen></iframe>' required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="description">Description</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="description" id="description" class="form-control" placeholder="This video was super useful and you should watch it." required>
+                    </div>
+                </div>
+                <div class="form-group">
                     <input type="submit" class="btn btn-default">
                 </div>
 				<div data-ng-show="error" class="text-danger">
