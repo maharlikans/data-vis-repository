@@ -34,6 +34,10 @@ var VideoSchema = new Schema({
 		required: 'Please fill Video description',
 		trim: true
 	},
+  tags: [{
+    type: String,
+		default: '',
+  }],
 	created: {
 		type: Date,
 		default: Date.now

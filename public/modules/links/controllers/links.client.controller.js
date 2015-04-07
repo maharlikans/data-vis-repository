@@ -81,7 +81,8 @@ angular.module('links').controller('LinksController', ['$scope', '$stateParams',
 			var link = new Links ({
 				name: this.name,
         url: this.url,
-        description: this.description
+        description: this.description,
+        img: this.img
 			});
 
 			// Redirect after save

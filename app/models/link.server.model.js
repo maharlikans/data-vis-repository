@@ -28,6 +28,16 @@ var LinkSchema = new Schema({
 		required: 'Please fill Link description',
 		trim: true
   },
+  img: {
+    type: String,
+		default: '',
+		required: 'Please fill Link url',
+		trim: true
+  },
+  tags: [{
+    type: String,
+		default: '',
+  }],
 	created: {
 		type: Date,
 		default: Date.now

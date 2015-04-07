@@ -3,10 +3,10 @@
     <h1>Links</h1>
   </div>
 
-  <div class="row">
+  <div class="row holder">
     <div class="col-sm-6 col-md-4" data-ng-repeat="link in links">
       <div class="thumbnail">
-        <img src="https://d13yacurqjgara.cloudfront.net/users/12329/screenshots/586896/brain-patterns.png" alt="brain-like patterns">
+        <img src="{{link.img}}" alt="">
         <div class="caption">
           <a data-ng-href="{{link.url}}"><h3 data-ng-bind="link.name"></h3></a>
           <p data-ng-bind="link.description"></p>

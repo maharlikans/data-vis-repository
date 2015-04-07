@@ -23,6 +23,12 @@
                         <input type="text" data-ng-model="link.description" id="description" class="form-control" placeholder="This is a really great tool that I want you all to see!" required>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="control-label" for="img">Image URL</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="link.img" id="img" class="form-control" placeholder="http://yourimage.png" required>
+                    </div>
+                </div>
                 <div class="form-group modal-footer">
                     <button class="btn btn-success" ng-click="updateLink()">Update</button>
                     <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
