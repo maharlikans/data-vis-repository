@@ -84,7 +84,8 @@ angular.module('papers').controller('PapersController', ['$scope', '$stateParams
         url: this.url,
         publication_date: this.publication_date,
         collect: this.collect,
-        doi: this.doi
+        doi: this.doi, 
+        tags: this.tags
 			});
 
 			// Redirect after save

@@ -33,6 +33,12 @@
               <span data-ng-bind="video.user.displayName"></span>
             </span>
           </small>
+          </br>
+          <small class="caption">
+            <span class="text-muted">
+              <span data-ng-repeat="tag in video.tags">#{{tag}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            </span>
+          </small>
         </div>
       </div>
     </div>

@@ -29,6 +29,12 @@
                         <input type="text" data-ng-model="video.description" id="description" class="form-control" placeholder="This video was super useful and you should watch it." required>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="control-label" for="tags">Tags</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="video.tags" id="tags" class="form-control" placeholder="inspiration, bci, stuff" required>
+                    </div>
+                </div>
                 <div class="form-group modal-footer">
                     <button class="btn btn-success" ng-click="updateVideo()">Update</button>
                     <button class="btn btn-warning" ng-click="cancel()">Cancel</button>

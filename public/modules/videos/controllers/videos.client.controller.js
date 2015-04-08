@@ -82,7 +82,8 @@ angular.module('videos').controller('VideosController', ['$scope', '$stateParams
 				name: this.name,
         url: this.url,
         embed: this.embed,
-        description: this.description
+        description: this.description,
+        tags: this.tags
 			});
 
 			// Redirect after save
