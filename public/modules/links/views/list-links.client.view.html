@@ -3,8 +3,9 @@
     <h1>Links</h1>
   </div>
 
-  <div class="row holder">
-    <div class="col-sm-6 col-md-4" data-ng-repeat="link in links">
+  <div class="row">
+    <!-- The $root.searchText is "defined" in the header in public/modules/views -->
+    <div class="col-sm-6 col-md-4" data-ng-repeat="link in links | filter:$root.searchText:strict">
       <div class="thumbnail">
         <img src="{{link.img}}" alt="">
         <div class="caption">
@@ -25,6 +26,12 @@
             <span data-ng-bind="link.created | date:'medium'"></span>
             by
             <span data-ng-bind="link.user.displayName"></span>
+          </span>
+        </small>
+        </br>
+        <small class="caption">
+          <span class="text-muted">
+            <span data-ng-repeat="tag in link.tags">#{{tag}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
           </span>
         </small>
       </div>

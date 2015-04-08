@@ -4,7 +4,8 @@
     </div>
 
     <div class="row">
-      <div class="col-md-6" ng-repeat="paper in papers">
+      <!-- The $root.searchText is "defined" in the header in public/modules/views -->
+      <div class="col-md-6" ng-repeat="paper in papers | filter:$root.searchText:strict">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3><a href="{{paper.url}}">{{paper.name}}</a></h3>
