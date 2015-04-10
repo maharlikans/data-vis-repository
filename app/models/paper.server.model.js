@@ -48,6 +48,10 @@ var PaperSchema = new Schema({
     type: String,
 		default: '',
   }],
+  type: {
+    type: String,
+		default: 'paper',
+  },
 	created: {
 		type: Date,
 		default: Date.now

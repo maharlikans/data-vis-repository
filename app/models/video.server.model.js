@@ -38,6 +38,10 @@ var VideoSchema = new Schema({
     type: String,
 		default: '',
   }],
+  type: {
+    type: String,
+		default: 'video',
+  },
 	created: {
 		type: Date,
 		default: Date.now

@@ -14,9 +14,11 @@
   </div>
 
   <div class="row">
-    <div class="col-md-4" data-ng-repeat="item in items | filter:$root.searchText.$">
-      <div class="thumbnail">
-        <h3>{{item.name}}</h3>
+    <div class="col-md-4" data-ng-repeat="item in items | filter:$root.searchText.$" data-ng-switch="item.type">
+      <div data-ng-switch-when="link">
+        <div class="thumbnail">
+          <h3>{{item.name}}</h3>
+        </div>
       </div>
     </div>
   </div>

@@ -38,6 +38,10 @@ var LinkSchema = new Schema({
     type: String,
 		default: '',
   }],
+  type: {
+    type: String,
+		default: 'link',
+  },
 	created: {
 		type: Date,
 		default: Date.now
