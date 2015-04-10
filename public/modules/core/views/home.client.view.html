@@ -1,4 +1,4 @@
-<section data-ng-controller="HomeController">
+<section data-ng-controller="HomeController" data-ng-init="find(items)">
   <div class="container">
     <div class="jumbotron">
       <h1>Can't find data viz materials?</h1>
@@ -6,6 +6,18 @@
       <img src="modules/core/img/open_eye.png" alt="Open eye picture"><br>
       Find links, good papers, videos, and inspiration here!
       </p>
+    </div>
+  </div>
+
+  <div class="page-header">
+    <h1>All Items</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4" data-ng-repeat="item in items | filter:$root.searchText.$">
+      <div class="thumbnail">
+        <h3>{{item.name}}</h3>
+      </div>
     </div>
   </div>
 </section>
