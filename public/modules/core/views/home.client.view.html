@@ -17,7 +17,107 @@
     <div class="col-md-4" data-ng-repeat="item in items | filter:$root.searchText.$" data-ng-switch="item.type">
       <div data-ng-switch-when="link">
         <div class="thumbnail">
-          <h3>{{item.name}}</h3>
+        <img src="{{item.img}}" alt="">
+        <div class="caption">
+          <a data-ng-href="{{item.url}}"><h3 data-ng-bind="item.name"></h3></a>
+          <p data-ng-bind="item.description"></p>
+        </div>
+        <div class="caption" data-ng-show="((authentication.user) && (authentication.user._id == item.user._id))">
+          <a class="btn btn-primary" data-ng-click="modalUpdate('lg', item)">
+            <i class="glyphicon glyphicon-edit"></i>
+          </a>
+          <a class="btn btn-primary" data-ng-click="modalDelete('lg', item)">
+            <i class="glyphicon glyphicon-trash"></i>
+          </a>
+        </div>
+        <small class="caption">
+          <span class="text-muted">
+            Posted on
+            <span data-ng-bind="item.created | date:'medium'"></span>
+            by
+            <span data-ng-bind="item.user.displayName"></span>
+          </span>
+        </small>
+        </br>
+        <small class="caption">
+          <span class="text-muted">
+            <span data-ng-repeat="tag in item.tags">#{{tag}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          </span>
+        </small>
+      </div>
+      </div>
+      <div data-ng-switch-when="paper">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3><a href="{{item.url}}">{{item.name}}</a></h3>
+          </div>
+          <div class="panel-body">
+            <p class="hang">
+            <span>{{item.authors}}</span>
+            </span>
+            ({{item.publication_date}}). {{item.name}}. 
+            <span ng-if="item.collection != ''"><i>{{item.collect}}</i>.</span>
+            </p>
+            <div class="caption" data-ng-show="((authentication.user) && (authentication.user._id == item.user._id))">
+              <a class="btn btn-primary" data-ng-click="modalUpdate('lg', item)">
+                <i class="glyphicon glyphicon-edit"></i>
+              </a>
+              <a class="btn btn-primary" data-ng-click="modalDelete('lg', item)">
+                <i class="glyphicon glyphicon-trash"></i>
+              </a>
+            </div>
+            <small class="caption">
+              <span class="text-muted">
+                Posted on
+                <span data-ng-bind="item.created | date:'medium'"></span>
+                by
+                <span data-ng-bind="item.user.displayName"></span>
+              </span>
+            </small>
+            </br>
+            <small class="caption">
+              <span class="text-muted">
+                <span data-ng-repeat="tag in item.tags">#{{tag}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              </span>
+            </small>
+          </div>
+        </div>
+      </div>
+      <div data-ng-switch-when="video">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h3><a href="{{item.url}}" target="_blank">{{item.name}}</a></h3>
+            <div class="embed-responsive embed-responsive-16by9">
+              <div ng-bind-html="item.embed | to_trusted">
+              </div>
+            </div>
+            </br>
+            <p data-ng-bind="item.description">
+            </p>
+            </br>
+            <div class="caption" data-ng-show="((authentication.user) && (authentication.user._id == item.user._id))">
+              <a class="btn btn-primary" data-ng-click="modalUpdate('lg', item)">
+                <i class="glyphicon glyphicon-edit"></i>
+              </a>
+              <a class="btn btn-primary" data-ng-click="modalDelete('lg', item)">
+                <i class="glyphicon glyphicon-trash"></i>
+              </a>
+            </div>
+            <small class="caption">
+              <span class="text-muted">
+                Posted on
+                <span data-ng-bind="item.created | date:'medium'"></span>
+                by
+                <span data-ng-bind="item.user.displayName"></span>
+              </span>
+            </small>
+            </br>
+            <small class="caption">
+              <span class="text-muted">
+                <span data-ng-repeat="tag in item.tags">#{{tag}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              </span>
+            </small>
+          </div>
         </div>
       </div>
     </div>
