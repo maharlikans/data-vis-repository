@@ -13,38 +13,38 @@
     <h1>All Items</h1>
   </div>
 
-  <div class="row">
-    <div class="col-md-4" data-ng-repeat="item in items | filter:$root.searchText.$" data-ng-switch="item.type">
+  <div masonry>
+    <div class="masonry-brick col-md-4" data-ng-repeat="item in items | filter:$root.searchText.$" data-ng-switch="item.type">
       <div data-ng-switch-when="link">
         <div class="thumbnail">
-        <img src="{{item.img}}" alt="">
-        <div class="caption">
-          <a data-ng-href="{{item.url}}"><h3 data-ng-bind="item.name"></h3></a>
-          <p data-ng-bind="item.description"></p>
+          <img src="{{item.img}}" alt="">
+          <div class="caption">
+            <a data-ng-href="{{item.url}}"><h3 data-ng-bind="item.name"></h3></a>
+            <p data-ng-bind="item.description"></p>
+          </div>
+          <div class="caption" data-ng-show="((authentication.user) && (authentication.user._id == item.user._id))">
+            <a class="btn btn-primary" data-ng-click="modalUpdate('lg', item)">
+              <i class="glyphicon glyphicon-edit"></i>
+            </a>
+            <a class="btn btn-primary" data-ng-click="modalDelete('lg', item)">
+              <i class="glyphicon glyphicon-trash"></i>
+            </a>
+          </div>
+          <small class="caption">
+            <span class="text-muted">
+              Posted on
+              <span data-ng-bind="item.created | date:'medium'"></span>
+              by
+              <span data-ng-bind="item.user.displayName"></span>
+            </span>
+          </small>
+          </br>
+          <small class="caption">
+            <span class="text-muted">
+              <span data-ng-repeat="tag in item.tags">#{{tag}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            </span>
+          </small>
         </div>
-        <div class="caption" data-ng-show="((authentication.user) && (authentication.user._id == item.user._id))">
-          <a class="btn btn-primary" data-ng-click="modalUpdate('lg', item)">
-            <i class="glyphicon glyphicon-edit"></i>
-          </a>
-          <a class="btn btn-primary" data-ng-click="modalDelete('lg', item)">
-            <i class="glyphicon glyphicon-trash"></i>
-          </a>
-        </div>
-        <small class="caption">
-          <span class="text-muted">
-            Posted on
-            <span data-ng-bind="item.created | date:'medium'"></span>
-            by
-            <span data-ng-bind="item.user.displayName"></span>
-          </span>
-        </small>
-        </br>
-        <small class="caption">
-          <span class="text-muted">
-            <span data-ng-repeat="tag in item.tags">#{{tag}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-          </span>
-        </small>
-      </div>
       </div>
       <div data-ng-switch-when="paper">
         <div class="panel panel-default">
