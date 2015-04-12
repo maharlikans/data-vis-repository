@@ -1,23 +1,23 @@
 <section data-ng-controller="HomeController" data-ng-init="find(items)">
   </br>
   </br>
-  <div class="container">
-    <div class="jumbotron">
-      <h1>Data Visualization Materials</h1>
-      <p class="lead">
-      <img src="modules/core/img/open_eye.png" alt="Open eye picture"><br>
-      They're hard to find and there's never standard for them. Here, they are
-      searchable and accessible. Try it out. 
-      </p>
-    </div>
-  </div>
+  <!-- <div class="container"> -->
+  <!--   <div class="jumbotron"> -->
+  <!--     <h1>Data Visualization Materials</h1> -->
+  <!--     <p class="lead"> -->
+  <!--     <img src="modules/core/img/open_eye.png" alt="Open eye picture"><br> -->
+  <!--     They're hard to find and there's never standard for them. Here, they are -->
+  <!--     searchable and accessible. Try it out.  -->
+  <!--     </p> -->
+  <!--   </div> -->
+  <!-- </div> -->
 
   <div class="page-header">
     <h1>All Items</h1>
   </div>
 
   <div masonry preserve-order reload-on-show>
-    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 masonry-brick" data-ng-repeat="item in items | filter:$root.searchText.$ | orderBy:'-created'" data-ng-switch="item.type">
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 masonry-brick" data-ng-repeat="item in items | filter:$root.searchText | orderBy:'-created'" data-ng-switch="item.type">
       <div data-ng-switch-when="link">
         <div class="thumbnail">
           <img src="{{item.img}}" alt="">
