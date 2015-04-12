@@ -4,8 +4,9 @@
     </div>
 
     <div class="row">
+  <div masonry preserve-order reload-on-show>
       <!-- The $root.searchText is "defined" in the header in public/modules/views -->
-      <div class="col-md-6" ng-repeat="paper in papers | filter:$root.searchText:strict">
+      <div class="col-xs-12 col-sm-6 col-md-4 masonry-brick" data-ng-repeat="paper in papers | filter:$root.searchText | orderBy:'-created'">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3><a href="{{paper.url}}">{{paper.name}}</a></h3>

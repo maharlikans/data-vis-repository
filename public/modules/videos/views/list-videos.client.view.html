@@ -8,12 +8,11 @@
     <div class="col-md-offset-2 col-md-8" ng-repeat="video in videos | filter:$root.searchText:strict">
       <div class="panel panel-default">
         <div class="panel-body">
-          <h3><a href="{{video.url}}" target="_blank">{{video.name}}</a></h3>
           <div class="embed-responsive embed-responsive-16by9">
             <div ng-bind-html="video.embed | to_trusted">
             </div>
           </div>
-          </br>
+          <h3><a href="{{video.url}}" target="_blank">{{video.name}}</a></h3>
           <p data-ng-bind="video.description">
           </p>
           </br>

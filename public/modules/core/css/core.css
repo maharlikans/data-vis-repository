@@ -16,3 +16,6 @@
 .jumbotron {
     text-align: center;
 }
+[data-ng-click] {
+    cursor: pointer;
+}

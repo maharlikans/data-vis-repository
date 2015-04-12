@@ -3,9 +3,9 @@
     <h1>Links</h1>
   </div>
 
-  <div class="row">
+  <div masonry preserve-order reload-on-show>
     <!-- The $root.searchText is "defined" in the header in public/modules/views -->
-    <div class="col-sm-6 col-md-4" data-ng-repeat="link in links | filter:$root.searchText:strict">
+    <div class="col-xs-12 col-sm-6 col-md-4 masonry-brick" data-ng-repeat="link in links | filter:$root.searchText | orderBy:'-created'">
       <div class="thumbnail">
         <img src="{{link.img}}" alt="">
         <div class="caption">
