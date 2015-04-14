@@ -1,0 +1,12 @@
+<div data-ng-controller="IdeasController">
+  <div class="modal-header">
+    <h3 class="modal-title">Confirm Deletion</h3>
+  </div>
+  <div class="modal-body">
+    Are you sure you want to delete the idea "{{idea.name}}"?
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-danger" ng-click="deleteIdea()">Delete</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+  </div>
+</div>

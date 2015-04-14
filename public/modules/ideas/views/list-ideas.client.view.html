@@ -1,0 +1,45 @@
+<section data-ng-controller="IdeasController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Ideas</h1>
+    </div>
+
+    <div class="row">
+    <!-- The $root.searchText is "defined" in the header in public/modules/views -->
+    <div class="col-md-offset-2 col-md-8" ng-repeat="idea in ideas | filter:$root.searchText:strict">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h3>{{idea.name}}</h3>
+          <p data-ng-bind="idea.description">
+          </p>
+          </br>
+          <div class="caption" data-ng-show="((authentication.user) && (authentication.user._id == idea.user._id))">
+            <a class="btn btn-primary" data-ng-click="modalUpdate('lg', idea)">
+              <i class="glyphicon glyphicon-edit"></i>
+            </a>
+            <a class="btn btn-primary" data-ng-click="modalDelete('lg', idea)">
+              <i class="glyphicon glyphicon-trash"></i>
+            </a>
+          </div>
+          <small class="caption">
+            <span class="text-muted">
+              Posted on
+              <span data-ng-bind="idea.created | date:'medium'"></span>
+              by
+              <span data-ng-bind="idea.user.displayName"></span>
+            </span>
+          </small>
+          </br>
+          <small class="caption">
+            <span class="text-muted">
+              <span data-ng-repeat="tag in idea.tags">#{{tag}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            </span>
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="alert alert-warning text-center" data-ng-hide="!ideas.$resolved || ideas.length">
+    	No Ideas yet, why don't you <a href="/#!/ideas/create">create one</a>?
+    </div>
+</section>
