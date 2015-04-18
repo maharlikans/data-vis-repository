@@ -6,7 +6,7 @@ angular.module('videos').controller('VideosController', ['$scope', '$stateParams
 		$scope.authentication = Authentication;
 
     // Open a modal window to delete a video
-    $scope.modalDelete = function (size, selectedVideo) {
+    this.modalDelete = function (size, selectedVideo) {
 
       var modalInstance = $modal.open({
         templateUrl: 'modules/videos/views/delete-video-confirmation.client.view.html',
@@ -40,7 +40,7 @@ angular.module('videos').controller('VideosController', ['$scope', '$stateParams
     };
     
     // Open a modal window to update a video
-    $scope.modalUpdate = function (size, selectedVideo) {
+    this.modalUpdate = function (size, selectedVideo) {
 
       var modalInstance = $modal.open({
         templateUrl: 'modules/videos/views/update-video-confirmation.client.view.html',
@@ -76,7 +76,7 @@ angular.module('videos').controller('VideosController', ['$scope', '$stateParams
     };
 
 		// Create new Video
-		$scope.create = function() {
+		this.create = function() {
 			// Create new Video object
 			var video = new Videos ({
 				name: this.name,
@@ -98,24 +98,24 @@ angular.module('videos').controller('VideosController', ['$scope', '$stateParams
 		};
 
 		// Remove existing Video
-		$scope.remove = function(video) {
+    this.remove = function(video) {
 			if ( video ) { 
 				video.$remove();
 
-				for (var i in $scope.videos) {
-					if ($scope.videos [i] === video) {
-						$scope.videos.splice(i, 1);
+				for (var i in this.videos) {
+					if (this.videos [i] === video) {
+						this.videos.splice(i, 1);
 					}
 				}
 			} else {
-				$scope.video.$remove(function() {
+				this.video.$remove(function() {
 					$location.path('videos');
 				});
 			}
 		};
 
 		// Update existing Video
-		$scope.update = function(video) {
+		this.update = function(video) {
 			video.$update(function() {
 				$location.path('videos');
 			}, function(errorResponse) {
@@ -124,13 +124,13 @@ angular.module('videos').controller('VideosController', ['$scope', '$stateParams
 		};
 
 		// Find a list of Videos
-		$scope.find = function() {
-			$scope.videos = Videos.query();
+		this.find = function() {
+			this.videos = Videos.query();
 		};
 
 		// Find existing Video
-		$scope.findOne = function() {
-			$scope.video = Videos.get({ 
+		this.findOne = function() {
+			this.video = Videos.get({ 
 				videoId: $stateParams.videoId
 			});
 		};

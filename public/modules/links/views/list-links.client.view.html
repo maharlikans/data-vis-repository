@@ -1,22 +1,22 @@
-<section data-ng-controller="LinksController" data-ng-init="find()">
+<section data-ng-controller="LinksController as linksCtrl" data-ng-init="linksCtrl.find()">
   <div class="page-header">
     <h1>Links</h1>
   </div>
 
   <div masonry preserve-order reload-on-show>
     <!-- The $root.searchText is "defined" in the header in public/modules/views -->
-    <div class="col-xs-12 col-sm-6 col-md-4 masonry-brick" data-ng-repeat="link in links | filter:$root.searchText | orderBy:'-created'">
+    <div class="col-xs-12 col-sm-6 col-md-4 masonry-brick" data-ng-repeat="link in linksCtrl.links | filter:$root.searchText | orderBy:'-created'">
       <div class="thumbnail">
         <img src="{{link.img}}" alt="">
         <div class="caption">
           <a data-ng-href="{{link.url}}"><h3 data-ng-bind="link.name"></h3></a>
           <p data-ng-bind="link.description"></p>
         </div>
-        <div class="caption" data-ng-show="((authentication.user) && (authentication.user._id == link.user._id))">
-          <a class="btn btn-primary" data-ng-click="modalUpdate('lg', link)">
+        <div class="caption" data-ng-show="((linksCtrl.authentication.user) && (linksCtrl.authentication.user._id == link.user._id))">
+          <a class="btn btn-primary" data-ng-click="linksCtrl.modalUpdate('lg', linksCtrl, link)">
             <i class="glyphicon glyphicon-edit"></i>
           </a>
-          <a class="btn btn-primary" data-ng-click="modalDelete('lg', link)">
+          <a class="btn btn-primary" data-ng-click="linksCtrl.modalDelete('lg', linksCtrl, link)">
             <i class="glyphicon glyphicon-trash"></i>
           </a>
         </div>
@@ -38,7 +38,7 @@
     </div>
   </div>
 
-  <div class="alert alert-warning text-center" data-ng-hide="!links.$resolved || links.length">
+  <div class="alert alert-warning text-center" data-ng-hide="!linksCtrl.links.$resolved || linksCtrl.links.length">
     No Links yet, why don't you <a href="/#!/links/create">create one</a>?
   </div>
 </section>

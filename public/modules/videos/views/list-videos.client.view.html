@@ -1,11 +1,11 @@
-<section data-ng-controller="VideosController" data-ng-init="find()">
+<section data-ng-controller="VideosController as videosCtrl" data-ng-init="videosCtrl.find()">
   <div class="page-header">
       <h1>Videos</h1>
   </div>
 
   <div class="row">
     <!-- The $root.searchText is "defined" in the header in public/modules/views -->
-    <div class="col-md-offset-2 col-md-8" ng-repeat="video in videos | filter:$root.searchText:strict">
+    <div class="col-md-offset-2 col-md-8" ng-repeat="video in videosCtrl.videos | filter:$root.searchText:strict">
       <div class="panel panel-default">
         <div class="panel-body">
           <div class="embed-responsive embed-responsive-16by9">
@@ -17,10 +17,10 @@
           </p>
           </br>
           <div class="caption" data-ng-show="((authentication.user) && (authentication.user._id == video.user._id))">
-            <a class="btn btn-primary" data-ng-click="modalUpdate('lg', video)">
+            <a class="btn btn-primary" data-ng-click="videosCtrl.modalUpdate('lg', video)">
               <i class="glyphicon glyphicon-edit"></i>
             </a>
-            <a class="btn btn-primary" data-ng-click="modalDelete('lg', video)">
+            <a class="btn btn-primary" data-ng-click="videosCtrl.modalDelete('lg', video)">
               <i class="glyphicon glyphicon-trash"></i>
             </a>
           </div>
@@ -43,7 +43,7 @@
     </div>
   </div>
 
-  <div class="alert alert-warning text-center" data-ng-hide="!videos.$resolved || videos.length">
+  <div class="alert alert-warning text-center" data-ng-hide="!videosCtrl.videos.$resolved || videosCtrl.videos.length">
     No Videos yet, why don't you <a href="/#!/videos/create">create one</a>?
   </div>
 </section>

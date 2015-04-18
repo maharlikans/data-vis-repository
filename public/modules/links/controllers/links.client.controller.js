@@ -3,10 +3,10 @@
 // Links controller
 angular.module('links').controller('LinksController', ['$scope', '$stateParams', '$location', 'Authentication', 'Links', '$modal', '$log', 
 	function($scope, $stateParams, $location, Authentication, Links, $modal, $log) {
-		$scope.authentication = Authentication;
+		this.authentication = Authentication;
 
     // Open a modal window to delete a link
-    $scope.modalDelete = function (size, selectedLink) {
+    this.modalDelete = function (size, ctrl, selectedLink) {
 
       var modalInstance = $modal.open({
         templateUrl: 'modules/links/views/delete-link-confirmation.client.view.html',
@@ -14,7 +14,7 @@ angular.module('links').controller('LinksController', ['$scope', '$stateParams',
           $scope.link = selectedLink;
 
           $scope.deleteLink = function () {
-            $scope.remove($scope.link);
+            ctrl.remove($scope.link);
             $modalInstance.close($scope.link);
           };
 
@@ -40,7 +40,7 @@ angular.module('links').controller('LinksController', ['$scope', '$stateParams',
     };
     
     // Open a modal window to update a link
-    $scope.modalUpdate = function (size, selectedLink) {
+    this.modalUpdate = function (size, ctrl, selectedLink) {
 
       var modalInstance = $modal.open({
         templateUrl: 'modules/links/views/update-link-confirmation.client.view.html',
@@ -48,7 +48,7 @@ angular.module('links').controller('LinksController', ['$scope', '$stateParams',
           $scope.link = selectedLink;
 
           $scope.updateLink = function() {
-            $scope.update($scope.link);
+            ctrl.update($scope.link);
             if (!$scope.error) {
               $modalInstance.close($scope.link);
             }
@@ -76,7 +76,7 @@ angular.module('links').controller('LinksController', ['$scope', '$stateParams',
     };
 
 		// Create new Link
-		$scope.create = function() {
+		this.create = function() {
 			// Create new Link object
 			var link = new Links ({
 				name: this.name,
@@ -98,24 +98,24 @@ angular.module('links').controller('LinksController', ['$scope', '$stateParams',
 		};
 
 		// Remove existing Link
-		$scope.remove = function(link) {
+		this.remove = function(link) {
 			if ( link ) { 
 				link.$remove();
 
-				for (var i in $scope.links) {
-					if ($scope.links [i] === link) {
-						$scope.links.splice(i, 1);
+				for (var i in this.links) {
+					if (this.links [i] === link) {
+						this.links.splice(i, 1);
 					}
 				}
 			} else {
-				$scope.link.$remove(function() {
+				this.link.$remove(function() {
 					$location.path('links');
 				});
 			}
 		};
 
 		// Update existing Link
-		$scope.update = function(link) {
+		this.update = function(link) {
 
 			link.$update(function() {
 				$location.path('links');
@@ -125,13 +125,13 @@ angular.module('links').controller('LinksController', ['$scope', '$stateParams',
 		};
 
 		// Find a list of Links
-		$scope.find = function() {
-			$scope.links = Links.query();
+		this.find = function() {
+			this.links = Links.query();
 		};
 
 		// Find existing Link
-		$scope.findOne = function() {
-			$scope.link = Links.get({ 
+		this.findOne = function() {
+			this.link = Links.get({ 
 				linkId: $stateParams.linkId
 			});
 		};

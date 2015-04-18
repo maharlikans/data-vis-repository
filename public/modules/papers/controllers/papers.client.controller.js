@@ -3,10 +3,10 @@
 // Papers controller
 angular.module('papers').controller('PapersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Papers', '$modal', '$log', 
 	function($scope, $stateParams, $location, Authentication, Papers, $modal, $log) {
-		$scope.authentication = Authentication;
+		this.authentication = Authentication;
 
     // Open a modal window to delete a paper
-    $scope.modalDelete = function (size, selectedPaper) {
+    this.modalDelete = function (size, selectedPaper) {
 
       var modalInstance = $modal.open({
         templateUrl: 'modules/papers/views/delete-paper-confirmation.client.view.html',
@@ -40,7 +40,7 @@ angular.module('papers').controller('PapersController', ['$scope', '$stateParams
     };
     
     // Open a modal window to update a paper
-    $scope.modalUpdate = function (size, selectedPaper) {
+    this.modalUpdate = function (size, selectedPaper) {
 
       var modalInstance = $modal.open({
         templateUrl: 'modules/papers/views/update-paper-confirmation.client.view.html',
@@ -76,7 +76,7 @@ angular.module('papers').controller('PapersController', ['$scope', '$stateParams
     };
 
 		// Create new Paper
-		$scope.create = function() {
+		this.create = function() {
 			// Create new Paper object
 			var paper = new Papers ({
 				name: this.name,
@@ -100,24 +100,24 @@ angular.module('papers').controller('PapersController', ['$scope', '$stateParams
 		};
 
 		// Remove existing Paper
-		$scope.remove = function(paper) {
+		this.remove = function(paper) {
 			if ( paper ) { 
 				paper.$remove();
 
-				for (var i in $scope.papers) {
-					if ($scope.papers [i] === paper) {
-						$scope.papers.splice(i, 1);
+				for (var i in this.papers) {
+					if (this.papers [i] === paper) {
+						this.papers.splice(i, 1);
 					}
 				}
 			} else {
-				$scope.paper.$remove(function() {
+				this.paper.$remove(function() {
 					$location.path('papers');
 				});
 			}
 		};
 
 		// Update existing Paper
-		$scope.update = function(paper) {
+		this.update = function(paper) {
 			paper.$update(function() {
 				$location.path('papers');
 			}, function(errorResponse) {
@@ -126,13 +126,13 @@ angular.module('papers').controller('PapersController', ['$scope', '$stateParams
 		};
 
 		// Find a list of Papers
-		$scope.find = function() {
-			$scope.papers = Papers.query();
+		this.find = function() {
+			this.papers = Papers.query();
 		};
 
 		// Find existing Paper
-		$scope.findOne = function() {
-			$scope.paper = Papers.get({ 
+		this.findOne = function() {
+			this.paper = Papers.get({ 
 				paperId: $stateParams.paperId
 			});
 		};
