@@ -18,11 +18,11 @@
             ({{paper.publication_date}}). {{paper.name}}. 
             <span ng-if="paper.collection != ''"><i>{{paper.collect}}</i>.</span>
             </p>
-            <div class="caption" data-ng-show="((authentication.user) && (authentication.user._id == paper.user._id))">
-              <a class="btn btn-primary" data-ng-click="papersCtrl.modalUpdate('lg', paper)">
+            <div class="caption" data-ng-show="((papersCtrl.authentication.user) && (papersCtrl.authentication.user._id == paper.user._id))">
+              <a class="btn btn-primary" data-ng-click="papersCtrl.modalUpdate('lg', papersCtrl, paper)">
                 <i class="glyphicon glyphicon-edit"></i>
               </a>
-              <a class="btn btn-primary" data-ng-click="papersCtrl.modalDelete('lg', paper)">
+              <a class="btn btn-primary" data-ng-click="papersCtrl.modalDelete('lg', papersCtrl, paper)">
                 <i class="glyphicon glyphicon-trash"></i>
               </a>
             </div>

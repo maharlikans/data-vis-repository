@@ -1,39 +1,39 @@
-<section data-ng-controller="PapersController">
+<section data-ng-controller="PapersController as papersCtrl">
     <div class="page-header">
         <h1>New Paper</h1>
     </div>
     <div class="col-md-12">
-        <form class="form-horizontal" data-ng-submit="create()" novalidate>
+        <form class="form-horizontal" data-ng-submit="papersCtrl.create()" novalidate>
             <fieldset>
                 <div class="form-group">
                     <label class="control-label" for="name">Name</label>
                     <div class="controls">
-                        <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Catchy Paper Title Here" required>
+                        <input type="text" data-ng-model="papersCtrl.name" id="name" class="form-control" placeholder="Catchy Paper Title Here" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="authors">Author</label>
                     <div class="controls">
-                        <input type="text" data-ng-model="authors" id="authors"
+                        <input type="text" data-ng-model="papersCtrl.authors" id="authors"
                         class="form-control" placeholder="Simpson, L., Wiggins, R." required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="name">url</label>
                     <div class="controls">
-                        <input type="text" data-ng-model="url" id="url" class="form-control" placeholder="http://your.site.here" required>
+                        <input type="text" data-ng-model="papersCtrl.url" id="url" class="form-control" placeholder="http://your.site.here" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="publication_date">Publication Date</label>
                     <div class="controls">
-                        <input type="text" data-ng-model="publication_date" id="publication_date" class="form-control" placeholder="Name" required>
+                        <input type="text" data-ng-model="papersCtrl.publication_date" id="publication_date" class="form-control" placeholder="Name" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="collect">Collection</label>
                     <div class="controls">
-                        <input type="text" data-ng-model="collect"
+                        <input type="text" data-ng-model="papersCtrl.collect"
                         id="collection" class="form-control"
                         placeholder="Proceedings of the 4000th annual ACM conference on Human factors in computing systems - CHI 5982">
                     </div>
@@ -41,13 +41,13 @@
                 <div class="form-group">
                     <label class="control-label" for="doi">DOI</label>
                     <div class="controls">
-                        <input type="text" data-ng-model="doi" id="doi" class="form-control" placeholder="doi:12.3456/789012.345678">
+                        <input type="text" data-ng-model="papersCtrl.doi" id="doi" class="form-control" placeholder="doi:12.3456/789012.345678">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="tags">Tags</label>
                     <div class="controls">
-                        <input type="text" data-ng-model="tags" id="tags" class="form-control" placeholder="just, type, some, tags, like, this" ng-list>
+                        <input type="text" data-ng-model="papersCtrl.tags" id="tags" class="form-control" placeholder="just, type, some, tags, like, this" ng-list>
                     </div>
                 </div>
                 <div class="form-group">

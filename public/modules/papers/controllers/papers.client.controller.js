@@ -6,7 +6,7 @@ angular.module('papers').controller('PapersController', ['$scope', '$stateParams
 		this.authentication = Authentication;
 
     // Open a modal window to delete a paper
-    this.modalDelete = function (size, selectedPaper) {
+    this.modalDelete = function (size, ctrl, selectedPaper) {
 
       var modalInstance = $modal.open({
         templateUrl: 'modules/papers/views/delete-paper-confirmation.client.view.html',
@@ -14,7 +14,7 @@ angular.module('papers').controller('PapersController', ['$scope', '$stateParams
           $scope.paper = selectedPaper;
 
           $scope.deletePaper = function () {
-            $scope.remove($scope.paper);
+            ctrl.remove($scope.paper);
             $modalInstance.close($scope.paper);
           };
 
@@ -40,7 +40,7 @@ angular.module('papers').controller('PapersController', ['$scope', '$stateParams
     };
     
     // Open a modal window to update a paper
-    this.modalUpdate = function (size, selectedPaper) {
+    this.modalUpdate = function (size, ctrl, selectedPaper) {
 
       var modalInstance = $modal.open({
         templateUrl: 'modules/papers/views/update-paper-confirmation.client.view.html',
@@ -48,7 +48,7 @@ angular.module('papers').controller('PapersController', ['$scope', '$stateParams
           $scope.paper = selectedPaper;
 
           $scope.updatePaper = function() {
-            $scope.update($scope.paper);
+            ctrl.update($scope.paper);
             if (!$scope.error) {
               $modalInstance.close($scope.paper);
             }
