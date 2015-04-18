@@ -3,10 +3,10 @@
 // Videos controller
 angular.module('videos').controller('VideosController', ['$scope', '$stateParams', '$location', 'Authentication', 'Videos', '$modal', '$log',
 	function($scope, $stateParams, $location, Authentication, Videos, $modal, $log) {
-		$scope.authentication = Authentication;
+		this.authentication = Authentication;
 
     // Open a modal window to delete a video
-    this.modalDelete = function (size, selectedVideo) {
+    this.modalDelete = function (size, ctrl, selectedVideo) {
 
       var modalInstance = $modal.open({
         templateUrl: 'modules/videos/views/delete-video-confirmation.client.view.html',
@@ -14,7 +14,7 @@ angular.module('videos').controller('VideosController', ['$scope', '$stateParams
           $scope.video = selectedVideo;
 
           $scope.deleteVideo = function () {
-            $scope.remove($scope.video);
+            ctrl.remove($scope.video);
             $modalInstance.close($scope.video);
           };
 
@@ -40,7 +40,7 @@ angular.module('videos').controller('VideosController', ['$scope', '$stateParams
     };
     
     // Open a modal window to update a video
-    this.modalUpdate = function (size, selectedVideo) {
+    this.modalUpdate = function (size, ctrl, selectedVideo) {
 
       var modalInstance = $modal.open({
         templateUrl: 'modules/videos/views/update-video-confirmation.client.view.html',
@@ -48,7 +48,7 @@ angular.module('videos').controller('VideosController', ['$scope', '$stateParams
           $scope.video = selectedVideo;
 
           $scope.updateVideo = function() {
-            $scope.update($scope.video);
+            ctrl.update($scope.video);
             if (!$scope.error) {
               $modalInstance.close($scope.video);
             }

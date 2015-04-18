@@ -1,4 +1,4 @@
-<section data-ng-controller="HomeController" data-ng-init="find(items)">
+<section data-ng-controller="HomeController as homeCtrl" data-ng-init="homeCtrl.find()">
   </br>
   </br>
   <div class="container">
@@ -17,7 +17,7 @@
   </div>
 
   <div masonry preserve-order reload-on-show>
-    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 masonry-brick" data-ng-repeat="item in items | filter:$root.searchText | orderBy:'-created'" data-ng-switch="item.type">
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 masonry-brick" data-ng-repeat="item in homeCtrl.items | filter:$root.searchText | orderBy:'-created'" data-ng-switch="item.type">
       <div data-ng-switch-when="link">
         <div class="thumbnail">
           <img src="{{item.img}}" alt="">
@@ -25,11 +25,12 @@
             <a data-ng-href="{{item.url}}"><h3 data-ng-bind="item.name"></h3></a>
             <p data-ng-bind="item.description"></p>
           </div>
-          <div class="caption" data-ng-show="((authentication.user) && (authentication.user._id == item.user._id))">
-            <a class="btn btn-primary" data-ng-click="modalUpdate('lg', item)">
+          <div class="caption" data-ng-show="((homeCtrl.authentication.user) &&
+            (homeCtrl.authentication.user._id == item.user._id))">
+            <a class="btn btn-primary" data-ng-click="homeCtrl.modalUpdate('lg', homeCtrl, item)">
               <i class="glyphicon glyphicon-edit"></i>
             </a>
-            <a class="btn btn-primary" data-ng-click="modalDelete('lg', item)">
+            <a class="btn btn-primary" data-ng-click="homeCtrl.modalDelete('lg', homeCtrl, item)">
               <i class="glyphicon glyphicon-trash"></i>
             </a>
           </div>
@@ -61,11 +62,11 @@
             ({{item.publication_date}}). {{item.name}}. 
             <span ng-if="item.collection != ''"><i>{{item.collect}}</i>.</span>
             </p>
-            <div class="caption" data-ng-show="((authentication.user) && (authentication.user._id == item.user._id))">
-              <a class="btn btn-primary" data-ng-click="modalUpdate('lg', item)">
+            <div class="caption" data-ng-show="((homeCtrl.authentication.user) && (homeCtrl.authentication.user._id == item.user._id))">
+              <a class="btn btn-primary" data-ng-click="homeCtrl.modalUpdate('lg', homeCtrl, item)">
                 <i class="glyphicon glyphicon-edit"></i>
               </a>
-              <a class="btn btn-primary" data-ng-click="modalDelete('lg', item)">
+              <a class="btn btn-primary" data-ng-click="homeCtrl.modalDelete('lg', homeCtrl, item)">
                 <i class="glyphicon glyphicon-trash"></i>
               </a>
             </div>
@@ -97,11 +98,11 @@
             <p data-ng-bind="item.description">
             </p>
             </br>
-            <div class="caption" data-ng-show="((authentication.user) && (authentication.user._id == item.user._id))">
-              <a class="btn btn-primary" data-ng-click="modalUpdate('lg', item)">
+            <div class="caption" data-ng-show="((homeCtrl.authentication.user) && (homeCtrl.authentication.user._id == item.user._id))">
+              <a class="btn btn-primary" data-ng-click="homeCtrl.modalUpdate('lg', homeCtrl, item)">
                 <i class="glyphicon glyphicon-edit"></i>
               </a>
-              <a class="btn btn-primary" data-ng-click="modalDelete('lg', item)">
+              <a class="btn btn-primary" data-ng-click="homeCtrl.modalDelete('lg', homeCtrl, item)">
                 <i class="glyphicon glyphicon-trash"></i>
               </a>
             </div>

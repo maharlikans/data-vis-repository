@@ -16,11 +16,11 @@
           <p data-ng-bind="video.description">
           </p>
           </br>
-          <div class="caption" data-ng-show="((authentication.user) && (authentication.user._id == video.user._id))">
-            <a class="btn btn-primary" data-ng-click="videosCtrl.modalUpdate('lg', video)">
+          <div class="caption" data-ng-show="((videosCtrl.authentication.user) && (videosCtrl.authentication.user._id == video.user._id))">
+            <a class="btn btn-primary" data-ng-click="videosCtrl.modalUpdate('lg', videosCtrl, video)">
               <i class="glyphicon glyphicon-edit"></i>
             </a>
-            <a class="btn btn-primary" data-ng-click="videosCtrl.modalDelete('lg', video)">
+            <a class="btn btn-primary" data-ng-click="videosCtrl.modalDelete('lg', videosCtrl, video)">
               <i class="glyphicon glyphicon-trash"></i>
             </a>
           </div>
